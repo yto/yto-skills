@@ -1,0 +1,21 @@
+{
+  "name": "yto-skills",
+  "owner": {
+    "name": "yto"
+  },
+  "metadata": {
+    "description": "ハンズオン用のスキル集",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "uuid-key-auth",
+      "description": "UUIDシークレットキー方式のアカウント管理（パスワードレス・メール不要のログインキー認証）のベストプラクティス集",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/uuid-key-auth"
+      ]
+    }
+  ]
+}
