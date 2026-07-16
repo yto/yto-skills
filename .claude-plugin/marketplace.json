@@ -16,6 +16,15 @@
       "skills": [
         "./skills/uuid-key-auth"
       ]
+    },
+    {
+      "name": "kukude-webapp-safety",
+      "description": "個人・小規模で公開するWebアプリを初心者が作るときの致命傷回避（秘密の直書き禁止・個人情報をコミットしない・認証はサーバ側・リポは基本Private・自前パスワードは避ける）。ククデ会ハンズオン向け",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/kukude-webapp-safety"
+      ]
     }
   ]
 }
