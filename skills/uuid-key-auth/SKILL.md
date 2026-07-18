@@ -24,7 +24,7 @@ description: UUIDシークレットキー方式のアカウント管理（パス
 - 専用リンクログインは `#key=`（フラグメント）: 読み込み時に `location.hash` から読んで localStorage へ保存し、**即 hash を消す**（`history.replaceState`）。`?key=` は既配布リンクの後方互換フォールバックのみ（読み取り時に併せて受ける／新規発行はしない）
 - ログアウト＝localStorageから削除。「キーを保存していないと二度と入れない」の強い確認ダイアログ必須
 - キー管理パネル: マスク表示＋表示切替・コピー・専用リンクコピー・メール保存（Gmail compose URL）・`navigator.share`
-- Safari は約7日間未訪問で localStorage を消すことがある（ITP）。「キーを別の場所にも保存して」の案内が保険になる
+- **localStorage は永続保存ではない**。WebKit(ITP) は「7日間そのサイトに操作が無い」と localStorage を自動削除する（とくに iPhone・iPad は全ブラウザが WebKit なので影響大。使い続ければ消えないが放置で消える）。だから **localStorage をキーの唯一の保管場所にしない**。「別の場所（自分宛てメール等）に必ず保存」を主導線にする（→ 発行直後のキー保存ステップ）
 
 ## パスワードマネージャ対応（Chrome内蔵・iCloudキーチェーン・1Password共通）
 
