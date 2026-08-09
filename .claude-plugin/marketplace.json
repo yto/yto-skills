@@ -25,6 +25,15 @@
       "skills": [
         "./skills/kukude-webapp-safety"
       ]
+    },
+    {
+      "name": "in-repo-notes",
+      "description": "調査・検討の経緯や決定を、専用ツールではなくリポジトリの中に Markdown で残す（in-repo 方式）。置き場所の判断・ファイル名・テンプレート・索引の更新までを担当する",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/in-repo-notes"
+      ]
     }
   ]
 }

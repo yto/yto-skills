@@ -10,6 +10,7 @@ Claude Code 用のスキル集。ハンズオンの参加者にプラグイン�
 | --- | --- |
 | [uuid-key-auth](skills/uuid-key-auth/) | UUIDシークレットキー方式のアカウント管理（パスワードレス・メール不要のログインキー認証）のベストプラクティス集 |
 | [kukude-webapp-safety](skills/kukude-webapp-safety/) | 公開Webアプリを初心者が作るときの致命傷回避（秘密の直書き禁止・個人情報をコミットしない・認証はサーバ側・リポは基本Private・自前パスワードは避ける）。ククデ会ハンズオン向け |
+| [in-repo-notes](skills/in-repo-notes/) | 調査・検討の経緯や決定を、専用ツールではなくリポジトリの中に Markdown で残す（in-repo 方式）。置き場所の判断・ファイル名・テンプレート・索引の更新まで |
 
 ## 入れ方
 
