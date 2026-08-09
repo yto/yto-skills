@@ -39,6 +39,8 @@ Claude Code 用のスキル集。ハンズオンの参加者にプラグイン�
 
 更新は `/plugin marketplace update yto-skills`。
 
+> **`/plugin` はデスクトップアプリでは使えない**（「一部のコマンドは Claude Code のターミナルでのみ使用できます」と出る）。デスクトップアプリで更新するときは、**ディレクトリ** 画面の **コード** タブで `yto-skills` の横の **…** → **アップデートを確認**。入れたあと自動では追随しないので、たまに確認する。
+
 ## スキルを追加する
 
 1. `skills/<新しい名前>/SKILL.md` を作る（雛形は [`template/SKILL.md`](template/SKILL.md)）
