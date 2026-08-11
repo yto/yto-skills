@@ -133,15 +133,57 @@ claude -p "使えるスキル名を1行1つで全部列挙して。説明不要�
 
 ## 古いキャッシュの掃除
 
-`~/.claude/plugins/cache/<marketplace>/<plugin>/<sha>/` はバージョンごとに溜まる。ただし**稼働中のセッションが参照している版を消すとそのセッションが壊れる**ので、`.in_use/` に置かれた PID が生きているかを見てから消す。
+`~/.claude/plugins/cache/<marketplace>/<plugin>/<sha>/` はバージョンごとに溜まる。消してよいのは次の3つを**すべて**満たすものだけ。
+
+1. `~/.claude/plugins/installed_plugins.json` の `installPath` が指していない（＝現行版ではない）
+2. 生きているプロセスが参照していない（`.in_use/` に置かれた PID を見る）
+3. `.orphaned_at` がある（Claude Code 自身が孤児と印を付けたもの）
+
+**稼働中のセッションが参照している版を消すと、そのセッションが壊れる。** `.orphaned_at` が付いていても、自分が今動かしているセッションが掴んでいることがある。
+
+### 落とし穴：PID の判定を雑にやると自分のセッションを消す
+
+`.in_use/` には `32070.tmp.778f87a4` のような**非数値のエントリが混ざる**。ここで複数の PID をまとめて `ps -p` に渡すと、非数値が1つ入っただけでコマンド全体が失敗し、**生きている PID まで「死んでいる」と判定される**。
+
+実際にこれで、自分が動かしているセッションが参照中のキャッシュを「消してよい」と誤判定した（気づかずに消していればセッションが壊れていた）。1つずつ、数値だけを対象に `kill -0` で見ること。
+
+### 消してよいものを一覧する（消しはしない）
 
 ```sh
-# 参照している PID が生きているか確認してから消す
-find ~/.claude/plugins/cache -path "*/.in_use/*" -type f -exec basename {} \; | sort -u |
-  while read pid; do ps -p "$pid" >/dev/null 2>&1 && echo "$pid ALIVE" || echo "$pid dead"; done
+#!/bin/sh
+cache="$HOME/.claude/plugins/cache"
+cur=$(python3 -c "import json,pathlib
+d=json.load(open(pathlib.Path.home()/'.claude/plugins/installed_plugins.json'))
+print('\n'.join(e['installPath'] for v in d['plugins'].values() for e in v))")
+
+find "$cache" -mindepth 3 -maxdepth 3 -type d | sort | while read -r d; do
+  printf '%s\n' "$cur" | grep -qxF "$d" && { echo "KEEP   $d  (現行版)"; continue; }
+
+  live=""
+  if [ -d "$d/.in_use" ]; then
+    for pid in $(ls "$d/.in_use" | cut -d. -f1); do
+      case "$pid" in ''|*[!0-9]*) continue;; esac   # 非数値のエントリは飛ばす
+      kill -0 "$pid" 2>/dev/null && live="$live $pid"
+    done
+  fi
+  [ -n "$live" ] && { echo "KEEP   $d  (PID$live が参照中)"; continue; }
+
+  [ -f "$d/.orphaned_at" ] || { echo "KEEP   $d  (孤児フラグ無し)"; continue; }
+  echo "DELETE $d"
+done
 ```
 
-`.orphaned_at` というファイルが置かれているディレクトリは Claude Code 自身が孤児と印を付けたものなので消してよい。
+`prune.sh` などに保存して `sh prune.sh` で実行する。出力を目で確認してから次に進む。
+
+### 消す
+
+```sh
+sh prune.sh | awk '$1=="DELETE"{print $2}' | while read -r d; do rm -rf "$d" && echo "削除: $d"; done
+```
+
+自分のセッションが参照している版は `KEEP` に残る。それも消したければ、そのセッションを終了してからもう一度流す。
+
+なお `claude plugin prune` という別のコマンドもあるが、こちらは「自動で入った依存プラグインのうち不要になったものを消す」もので、キャッシュの世代掃除とは別物。
 
 ## 参照
 
