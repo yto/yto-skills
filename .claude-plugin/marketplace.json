@@ -11,29 +11,17 @@
     {
       "name": "uuid-key-auth",
       "description": "UUIDシークレットキー方式のアカウント管理（パスワードレス・メール不要のログインキー認証）のベストプラクティス集",
-      "source": "./",
-      "strict": false,
-      "skills": [
-        "./skills/uuid-key-auth"
-      ]
+      "source": "./plugins/uuid-key-auth"
     },
     {
       "name": "kukude-webapp-safety",
       "description": "個人・小規模で公開するWebアプリを初心者が作るときの致命傷回避（秘密の直書き禁止・個人情報をコミットしない・認証はサーバ側・リポは基本Private・自前パスワードは避ける）。個人開発のハンズオン参加者向け",
-      "source": "./",
-      "strict": false,
-      "skills": [
-        "./skills/kukude-webapp-safety"
-      ]
+      "source": "./plugins/kukude-webapp-safety"
     },
     {
       "name": "in-repo-notes",
       "description": "調査・検討の経緯や決定を、専用ツールではなくリポジトリの中に Markdown で残す（in-repo 方式）。置き場所の判断・ファイル名・テンプレート・索引の更新までを担当する",
-      "source": "./",
-      "strict": false,
-      "skills": [
-        "./skills/in-repo-notes"
-      ]
+      "source": "./plugins/in-repo-notes"
     }
   ]
 }
