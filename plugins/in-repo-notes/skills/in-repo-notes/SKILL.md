@@ -105,7 +105,7 @@ description: 調査・検討の経緯や決定を、専用ツールではなく�
 `notes/` から作る。索引・決定ログ・Inbox は**この時点では作らない**（必要になってから足すもの）。
 
 1. `notes/` を作る
-2. `CLAUDE.md` に数行だけ追記する
+2. `AGENTS.md` に数行だけ追記する
 
 ```markdown
 ## 作業メモ
@@ -116,7 +116,7 @@ topic は英数字とハイフン（本文は日本語でよい）。
 判断の背景を知りたいときは notes/ を読むこと。
 ```
 
-3. Codex など他のエージェントとも共有するなら、上の数行を `AGENTS.md` に書き、`CLAUDE.md` の先頭に `@AGENTS.md` の1行を置いて読み込ませる。symlink は使わない。Claude Code の編集機能がリンク越しに書き込まないうえ、Windows では clone した側で壊れることがある
+3. `CLAUDE.md` の先頭に `@AGENTS.md` の1行を置いて、`AGENTS.md` を読み込ませる。symlink は使わない。Claude Code の編集機能がリンク越しに書き込まないうえ、Windows では clone した側で壊れることがある
 
 ## 注意
 
