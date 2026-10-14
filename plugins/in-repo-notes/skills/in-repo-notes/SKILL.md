@@ -116,7 +116,7 @@ topic は英数字とハイフン（本文は日本語でよい）。
 判断の背景を知りたいときは notes/ を読むこと。
 ```
 
-3. Codex など他のエージェントとも共有するなら、`AGENTS.md` を `CLAUDE.md` への symlink にする（`ln -s CLAUDE.md AGENTS.md`）。ただし Windows では symlink の作成に管理者権限か開発者モードが要り、Git の設定によっては実体化せずに壊れる。その場合は symlink をやめ、`CLAUDE.md` の中に `@AGENTS.md` と書いて読み込ませる（公式もこちらを案内している）
+3. Codex など他のエージェントとも共有するなら、上の数行を `AGENTS.md` に書き、`CLAUDE.md` の先頭に `@AGENTS.md` の1行を置いて読み込ませる（公式が案内している形）。symlink は使わない。Claude Code の編集機能がリンク越しに書き込まないうえ、Windows では clone した側で壊れることがある
 
 ## 注意
 
