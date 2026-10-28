@@ -2,15 +2,15 @@
 
 Claude Code 用のスキル集。ハンズオンの参加者にプラグイン・マーケットプレイスとして配布するためのリポジトリ。
 
-各スキルは `skills/<name>/SKILL.md` に自己完結で入っている。`marketplace.json` がそれらをプラグインとして束ねる。
+各スキルは `plugins/<name>/skills/<name>/SKILL.md` に自己完結で入っている。`plugins/<name>/` が1つのプラグインで、`.claude-plugin/marketplace.json` がそれらを束ねる。
 
 ## 収録スキル
 
 | スキル | 内容 |
 | --- | --- |
-| [uuid-key-auth](skills/uuid-key-auth/) | UUIDシークレットキー方式のアカウント管理（パスワードレス・メール不要のログインキー認証）のベストプラクティス集 |
-| [kukude-webapp-safety](skills/kukude-webapp-safety/) | 公開Webアプリを初心者が作るときの致命傷回避（秘密の直書き禁止・個人情報をコミットしない・認証はサーバ側・リポは基本Private・自前パスワードは避ける）。個人開発のハンズオン参加者向け |
-| [in-repo-notes](skills/in-repo-notes/) | 調査・検討の経緯や決定を、専用ツールではなくリポジトリの中に Markdown で残す（in-repo 方式）。置き場所の判断・ファイル名・テンプレート・索引の更新まで |
+| [uuid-key-auth](plugins/uuid-key-auth/skills/uuid-key-auth/) | UUIDシークレットキー方式のアカウント管理（パスワードレス・メール不要のログインキー認証）のベストプラクティス集 |
+| [kukude-webapp-safety](plugins/kukude-webapp-safety/skills/kukude-webapp-safety/) | 公開Webアプリを初心者が作るときの致命傷回避（秘密の直書き禁止・個人情報をコミットしない・認証はサーバ側・リポは基本Private・自前パスワードは避ける）。個人開発のハンズオン参加者向け |
+| [in-repo-notes](plugins/in-repo-notes/skills/in-repo-notes/) | 調査・検討の経緯や決定を、専用ツールではなくリポジトリの中に Markdown で残す（in-repo 方式）。置き場所の判断・ファイル名・テンプレート・索引の更新まで |
 
 ## 入れ方
 
@@ -24,7 +24,7 @@ Claude Code 用のスキル集。ハンズオンの参加者にプラグイン�
 6. **ディレクトリ** 画面が開く。**コード** タブに `yto-skills` が現れる
 7. 入れたいプラグイン（例: `Kukude webapp safety`）を選び、**インストール**
 
-> 手順5でこんな警告が出る。これは正しい警告で、マーケットプレイスのプラグインは Anthropic が中身を保証しない、という意味。**入れる前に中身（`skills/<名前>/SKILL.md`）を読んでから**進めること。
+> 手順5でこんな警告が出る。これは正しい警告で、マーケットプレイスのプラグインは Anthropic が中身を保証しない、という意味。**入れる前に中身（`plugins/<名前>/skills/<名前>/SKILL.md`）を読んでから**進めること。
 >
 > > プラグインをインストール、更新、または使用する前に、そのプラグインを信頼できることを確認してください。（略）Anthropicは保証できません。
 
@@ -43,10 +43,10 @@ Claude Code 用のスキル集。ハンズオンの参加者にプラグイン�
 
 ## スキルを追加する
 
-1. `skills/<新しい名前>/SKILL.md` を作る（雛形は [`template/SKILL.md`](template/SKILL.md)）
-2. `marketplace.json` の `plugins` に、そのスキルを含むプラグインを1つ追加（または既存プラグインの `skills` 配列に `./skills/<新しい名前>` を足す）
+1. `plugins/<新しい名前>/skills/<新しい名前>/SKILL.md` を作る（雛形は [`template/SKILL.md`](template/SKILL.md)）
+2. `.claude-plugin/marketplace.json` の `plugins` に、`"source": "./plugins/<新しい名前>"` のプラグインを1つ追加する
 
-スキルにはスクリプトや参照ドキュメントを同梱してよい（`skills/<名前>/scripts/` など、相対パスで参照する）。
+スキルにはスクリプトや参照ドキュメントを同梱してよい（`plugins/<名前>/skills/<名前>/scripts/` など、相対パスで参照する）。
 
 ## ライセンス
 
